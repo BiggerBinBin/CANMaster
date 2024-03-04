@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QDebug>
 #include <QJsonArray>
+#include <QApplication>
 #include "communicate.h"
 #include "../DeviceIO/RegisterDevClass.h"
 
@@ -12,12 +13,14 @@ Communicate::Communicate(QObject *parent) : QObject(parent)
 {
     //Using this static function register reflect class first
     RegisterDevReflect::RegisterReflect();
+    QString path = QApplication::applicationDirPath()+"/Config/className.json";
+    readDevName(path);
 }
 
 bool Communicate::openDevice(const DeviceParameter &param)
 {
 
-    if(param.devType>className.size())
+    if(param.devType>=className.size())
     {
         return false;
     }
@@ -39,8 +42,14 @@ bool Communicate::readDevName(QString path)
     {
         return false;
     }
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        //QMessageBox::warning(NULL, QObject::tr("warning"), QObject::tr("数据不存在，初始化数据失败"));
+        return false;
+    }
     //Using text stream to read data
     QTextStream stream(&file);
+    stream.setCodec("UTF-8");
     QString str = stream.readAll();
     QJsonParseError err;
     //string convert to QJsonDocument
@@ -62,7 +71,5 @@ bool Communicate::readDevName(QString path)
      {
         className.append(jarr.at(i).toString());
      }
-
-
 
 }

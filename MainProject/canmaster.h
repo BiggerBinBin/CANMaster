@@ -9,6 +9,11 @@ QT_END_NAMESPACE
 
 
 class Communicate;
+
+class QPushButton;
+class QLabel;
+class QComboBox;
+
 class CANMaster : public QMainWindow
 {
     Q_OBJECT
@@ -20,5 +25,13 @@ public:
 private:
     Ui::CANMaster *ui;
     QScopedPointer<Communicate>m_CommuniPtr;
+    QComboBox* comboxDevType = nullptr;
+    QComboBox* comboxDevChannel = nullptr;
+    QPushButton* pbRefreshDev = nullptr;
+    QComboBox* comboxModel = nullptr;
+    QComboBox* comboxBaudRate = nullptr;
+
+private:
+    void InitGUI();
 };
 #endif // CANMASTER_H

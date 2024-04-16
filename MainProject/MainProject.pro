@@ -40,11 +40,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 win32:CONFIG(release, debug|release): {
     LIBS += -L$$OUT_PWD/../DeviceIO/release/ -lDeviceIO
-    #LIBS += -L$$OUT_PWD/../DeviceIO/release/ -lDeviceIO
+    LIBS += -L$$PWD/../DeviceIO/3rd/QsLog/bin -llibQsLog2
     INCLUDEPATH += $$PWD/../DeviceIO/3rd/QsLog/include/
+    INCLUDEPATH += $$PWD/../DeviceIO/3rd/pcan/include/
 }
 
-else:win32:CONFIG(debug, debug|release): {LIBS += -L$$OUT_PWD/../DeviceIO/debug/ -lDeviceIO }
+else:win32:CONFIG(debug, debug|release): {
+LIBS += -L$$OUT_PWD/../DeviceIO/debug/ -lDeviceIO
+LIBS += -L$$PWD/../DeviceIO/3rd/QsLog/bin -llibQsLog2
+}
 
 else:unix: {
     LIBS += -L$$OUT_PWD/../DeviceIO/ -lDeviceIO
@@ -57,11 +61,10 @@ INCLUDEPATH += $$PWD/../DeviceIO
 
 DEPENDPATH += $$PWD/../DeviceIO
 
-#unix|win32: LIBS += -lQsLog
-
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ModelDataManage/release/ -lModelDataManage
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ModelDataManage/debug/ -lModelDataManage
 else:unix: LIBS += -L$$OUT_PWD/../ModelDataManage/ -lModelDataManage
 
 INCLUDEPATH += $$PWD/../ModelDataManage
 DEPENDPATH += $$PWD/../ModelDataManage
+

@@ -1,4 +1,4 @@
-#include <QPushButton>
+﻿#include <QPushButton>
 #include <QComboBox>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -122,7 +122,7 @@ void CANMaster::InitGUI()
     messageview = new MessageView(this);
     logBrower = new QTextBrowser(this);
     QVBoxLayout* secondRightLayout = new QVBoxLayout(this);
-    secondRightLayout->addWidget(messageview->getTabWidget().data());
+    secondRightLayout->addWidget(messageview->getTabWidget());
     secondRightLayout->addWidget(logBrower);
 
 

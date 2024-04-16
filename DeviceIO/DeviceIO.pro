@@ -37,9 +37,9 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/3rd/pcan/lib/release/ -lpcanbasic
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/3rd/pcan/lib/debug/ -lpcanbasic
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/3rd/pcan/lib/ -lpcanbasic
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/3rd/pcan/lib/ -lpcanbasic
 else:unix:!macx: LIBS += -L$$PWD/3rd/pcan/lib/ -lpcanbasic
 
-INCLUDEPATH += $$PWD/3rd/pcan/lib
-DEPENDPATH += $$PWD/3rd/pcan/lib
+INCLUDEPATH += $$PWD/3rd/pcan/include
+#DEPENDPATH += $$PWD/3rd/pcan/lib
